@@ -1,0 +1,5 @@
+I realize you don't have time to full with this now, but when you do, the spreadsheet I sent you was New Bedford Final Census Tract calcs correct? (I actually meant to send a simpler one I had made for you but I guess I forgot to save it.)
+
+If so, the columns to experiment with are S and T -- number of people born in Port. That will identify the main neighborhoods. The T column is already ranked.
+
+I suggest just trying to map those tract with > 400 born in Port. That will give us 10 tracts, out of 30.  
