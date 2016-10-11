@@ -121,7 +121,7 @@ elif mymap == "B3": #TT and B3
     #r = shapefile.Reader(r"cb_2015_25_tract_500k.shp")
 #this one not very good
 #    r = shapefile.Reader(r"tl_2015_25_tract.shp")
-else: #B3
+else:
     r = shapefile.Reader(r"shapefiles/tabblock2010_25_pophu.shp")
 
 
@@ -157,6 +157,9 @@ patch_2 = None
 patch_3 = None
 patch_4 = None
 patch_5 = None
+
+if (mymap == "B3"): #more patches for this map
+    plot_dict.update(dict.fromkeys(['654100','653203','653101','646101','645103','645102','644200','644101','030901'], shade[0]))  # Portuguese
 
 
 
@@ -219,16 +222,11 @@ if (mymap == "PR") or (mymap == "B3"):
 
         map_title = "Major Portuguese, Cape Verdean and Brazilian \n Neighborhoods in Providence County "
 
-if (mymap == "B3"): #more patches for this map
-    plot_dict.update(dict.fromkeys(['654100','653203','653101','646101','645103','645102','644200','644101','030901'], shade[0]))  # Portuguese
-
-
-
-
-
-    plt.legend(handles=[patch_1, patch_2, patch_3, patch_4,patch_5],loc=8)
+if (mymap == "B3"):  # more patches for this map
+    plt.legend(handles=[patch_1, patch_2, patch_3, patch_4, patch_5], loc=8)
     map_title = "Major Portuguese, Cape Verdean and Brazilian \n Neighborhoods in the Interstate 195 Corridor"
-    #TODO remove church dots
+
+            #TODO remove church dots
     #PR FR and NB
     #add 9 other tracts w/ shading Portuguese neighborhoos
     #Taunton should not be on there
@@ -306,7 +304,9 @@ church_data_pandas = pandas.read_table("churches.txt")
 
 xpan =[]
 ypan = []
-if (mymap!="B3"):
+#if (mymap!="B3"):
+#TODO
+if (True):
 
 
     # church_row_select = church_data_pandas['map'] == mymap
@@ -348,7 +348,9 @@ if (mymap!="B3"):
     m.scatter(xpan,ypan, marker ='o', color='r', s=church_size,zorder=100)
 
     for k,v in church_data_pandas.iterrows():
-        if (v['map']==mymap):
+        #if (v['map']==mymap):
+        #TODO
+        if (True):
             ax.text(v['x'],v['y'],v['ID'],zorder = 200)
             print(v['description'])
 
