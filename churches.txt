@@ -1,0 +1,26 @@
+map	ID	description	lons	lats
+NB	1	1869 St. John the Baptist 344 County Street New Bedford, MA 02740 (CLOSED 2012)	-70.9269	41.6273
+NB	2	1903 Our Lady of Mt. Carmel 230 Bonney St, New Bedford, MA 02744	-70.9277	41.619697
+NB	3	1905 Our Lady of the Assumption (Cape Verdean) 47 S 6th St, New Bedford, MA 02740	-70.9276	41.6304
+NB	4	1909 Our Lady of the Immaculate Conception 136 Earle Street New Bedford, MA 02746	-70.9259	41.6647
+FR	1	1876 Santo Cristo 185 Canal St, Fall River, MA 02721	-71.1628	41.6995
+FR	2	1902 St. Michael 189 Essex St, Fall River, MA 02720	-71.1473	41.7235
+FR	3	1904 Espirito Santo 311 Alden St, Fall River, MA 02723	-71.1339	41.6879
+FR	4	1911 St. Anthony of Padua 48 16th St, Fall River, MA 02723	-71.1425	41.6992
+FR	5	1915 St. Elizabeth 615 Tucker St Fall River, MA 02721	-71.1579	41.6765
+FR	6	1915 Our Lady of the Angels 1208 Dwelly St, Fall River, MA 02724	-71.1658	41.6830
+FR	7	1924 Our Lady of Health 642 Cambridge St Fall River, MA 02721 (CLOSED 2006)	-71.1480	41.6861
+TT	1	1903 St. Anthony 126 School St, Taunton, MA 02780 	-71.0897	41.9090 
+TT	2	1905 Our Lady of Lourdes 52 1st St, Taunton, MA 02780	-71.0945	41.8887
+PR	1	1953 Our Lady of Fatima 1 Fatima Drive, Cumberland (Valley Falls), RI	-71.3889	41.9052
+PR	2	1916 St. Francis Xavier 81 N Carpenter St, East Providence, RI 02914	-71.3730	41.8173
+PR	3	1923 St. Anthony 32 Lawn Ave, Pawtucket, RI 02860	-71.4001	41.8732
+PR	4	1885 Our Lady of the Rosary 463 Benefit St, Providence, RI 02903	-71.3999	41.8187
+PR	5	1925 St. Anthony 1 Sunset Ave, West Warwick, RI 02893	-71.5253	41.7155
+MA	1	XXXX St. Elizabeth Church, 577 Wood St, Bristol, RI 02809	-71.2731	41.6755
+MA	2	XXXX St. Thomas the Apostle Church. 500 Metacom Ave Warren, RI 02885	-71.2692	41.7247
+MA	3	XXXX St John of God, 996 Brayton Ave, Somerset, MA 02726	-71.1609	41.7370
+
+
+
+

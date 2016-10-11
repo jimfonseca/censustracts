@@ -24,6 +24,7 @@ mpl.rcParams['ytick.labelsize'] = 6.
 #mymap = "TT"
 mymap = "B3"
 #mymap = "PR"
+
 black_and_white = False
 mydpi = 300 # 600 or 300
 myres = 'i' #Can be c (crude), l (low), i (intermediate), h (high), f (full) or None.
@@ -100,13 +101,13 @@ if mymap == "PR":
 #    r = shapefile.Reader(r"tl_2010_44_tract10.shp")
 
 #with streets
-    r = shapefile.Reader(r"tabblock2010_44_pophu.shp")
+    r = shapefile.Reader(r"shapefiles/tabblock2010_44_pophu.shp")
 
 elif mymap == "B3": #TT and B3
 
 #basic shapes
 #    r = shapefile.Reader(r"tl_2010_25_tract10.shp")
-    r = shapefile.Reader(r"tl_2010_25_tract10.shp")
+    r = shapefile.Reader(r"shapefiles/tl_2010_25_tract10.shp")
 
 #with streets
 
@@ -121,7 +122,7 @@ elif mymap == "B3": #TT and B3
 #this one not very good
 #    r = shapefile.Reader(r"tl_2015_25_tract.shp")
 else: #B3
-    r = shapefile.Reader(r"tabblock2010_25_pophu.shp")
+    r = shapefile.Reader(r"shapefiles/tabblock2010_25_pophu.shp")
 
 
 
@@ -144,6 +145,8 @@ else:
 #    shade_med="#566573"
 #    shade_dark="#212F3D"
 #    shade_vlight="#EAECEE"
+
+#TODO B3 map should have single shade
     shade = ["#0E6251","#117A65","#17A589","#48C9B0","#A3E4D7","#D4EFDF"]
 
 
@@ -216,9 +219,20 @@ if (mymap == "PR") or (mymap == "B3"):
 
         map_title = "Major Portuguese, Cape Verdean and Brazilian \n Neighborhoods in Providence County "
 
-if (mymap == "B3"):
+if (mymap == "B3"): #more patches for this map
+    plot_dict.update(dict.fromkeys(['654100','653203','653101','646101','645103','645102','644200','644101','030901'], shade[0]))  # Portuguese
+
+
+
+
+
     plt.legend(handles=[patch_1, patch_2, patch_3, patch_4,patch_5],loc=8)
-    map_title = "Major Portuguese, Cape Verdean and Brazilian \n Neighborhoods"
+    map_title = "Major Portuguese, Cape Verdean and Brazilian \n Neighborhoods in the Interstate 195 Corridor"
+    #TODO remove church dots
+    #PR FR and NB
+    #add 9 other tracts w/ shading Portuguese neighborhoos
+    #Taunton should not be on there
+    #195 map is the same as B3
 
 #map_title2 = "Major Portuguese and Cape Verdean\n Neighborhoods in New Bedford"
 ax.text(.5,.9,map_title,horizontalalignment='center',transform=ax.transAxes,fontsize=14, bbox=dict(facecolor='white', edgecolor='k',pad=10.0))
@@ -256,7 +270,7 @@ for record, shape in zip(records,shapes):
 
 if mymap == "B3":
     #hack for 2 states
-    r = shapefile.Reader(r"tl_2010_44_tract10.shp")
+    r = shapefile.Reader(r"shapefiles/tl_2010_44_tract10.shp")
     shapes = r.shapes()
     records = r.records()
 
@@ -287,44 +301,56 @@ if mymap == "B3":
         lines.set_linewidth(0.6)
         ax.add_collection(lines)
 
-church_data = np.genfromtxt('churches_np.txt',delimiter='\t',names=['map','ID','description','lons','lats'],dtype=None)
+#church_data = np.genfromtxt('churches_np.txt',delimiter='\t',names=['map','ID','description','lons','lats'],dtype=None)
 church_data_pandas = pandas.read_table("churches.txt")
 
-x,y= m(church_data['lons'], church_data['lats'])
+xpan =[]
+ypan = []
+if (mymap!="B3"):
 
-xpan,ypan=m(church_data_pandas['lons'].tolist(), church_data_pandas['lats'].tolist())
+
+    # church_row_select = church_data_pandas['map'] == mymap
+    # mylons = church_data_pandas['lons'][church_row_select]
+    # mylons_list = mylons.tolist()
+    # mylats = church_data_pandas['lats'][church_row_select]
+    # mylats_list = mylons.tolist()
+
+    mylons_list = church_data_pandas['lons'].tolist()
+    mylats_list = church_data_pandas['lats'].tolist()
+
+    xpan,ypan=m(mylons_list, mylats_list)
 
 
-if mymap == "NB":
-    shiftx = -180
-    shifty = -180
-elif mymap == "FR":
-    shiftx = -200
-    shifty = -200
-elif mymap == "TT":
-    shiftx = -140
-    shifty = -160
-elif mymap == "PR":
-    shiftx = -200
-    shifty = -200
-elif mymap == "B3":
-    shiftx = -200
-    shifty = -200
 
-church_data_pandas["x"] =xpan
-church_data_pandas["y"] =ypan
-church_data_pandas["x"] = church_data_pandas["x"] +shiftx
-church_data_pandas["y"] = church_data_pandas["y"] +shifty
+    if mymap == "NB":
+        shiftx = -180
+        shifty = -180
+    elif mymap == "FR":
+        shiftx = -200
+        shifty = -200
+    elif mymap == "TT":
+        shiftx = -140
+        shifty = -160
+    elif mymap == "PR":
+        shiftx = -200
+        shifty = -200
+    elif mymap == "B3":
+        shiftx = -200
+        shifty = -200
+
+    church_data_pandas["x"] =xpan
+    church_data_pandas["y"] =ypan
+    church_data_pandas["x"] = church_data_pandas["x"] +shiftx
+    church_data_pandas["y"] = church_data_pandas["y"] +shifty
 #print(church_data_pandas.head(3))
-church_size = 200
-if (mymap==3):
-    church_size = 100
-m.scatter(xpan,ypan, marker ='o', color='r', s=church_size,zorder=100)
+    church_size = 200
 
-for k,v in church_data_pandas.iterrows():
-    if (v['map']==mymap):
-        ax.text(v['x'],v['y'],v['ID'],zorder = 200)
-        print(v['description'])
+    m.scatter(xpan,ypan, marker ='o', color='r', s=church_size,zorder=100)
+
+    for k,v in church_data_pandas.iterrows():
+        if (v['map']==mymap):
+            ax.text(v['x'],v['y'],v['ID'],zorder = 200)
+            print(v['description'])
 
 
 
